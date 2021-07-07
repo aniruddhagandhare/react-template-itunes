@@ -6,5 +6,9 @@ export default {
       padding: 20
     },
     exact: true
+  },
+  floating: {
+    route: '/floating',
+    props: {}
   }
 };
