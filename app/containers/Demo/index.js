@@ -95,20 +95,7 @@ const CustomInput = styled(Input)`
     }
   }
 `;
-// const CustomButton = styled(Button)`
-//   && {
-//     background-color: orange;
-//     color: white;
-//     height: 100%;
-//     padding: 13px 20px;
-//     border-radius: 4px;
-//     margin-left: 5px;
-//     &:hover {
-//       background-color: white;
-//       color: orange;
-//     }
-//   }
-// `;
+
 const FlexWrapper = styled.div`
   display: flex;
 `;
