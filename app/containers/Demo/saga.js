@@ -5,6 +5,9 @@ import { getSongs } from '@services/itunesApi';
 const { GET_SONGS } = demoTypes;
 const { successGetSongs, errorGetSongs } = demoCreators;
 export function* defaultFunction(action) {
+  if(action.searchText === '') {
+    return;
+  }
   const response = yield call(getSongs, action.searchText);
   const { data, ok } = response;
   if (ok) {

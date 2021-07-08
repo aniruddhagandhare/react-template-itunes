@@ -12,5 +12,6 @@
   "repository_stars": "Repository stars: {stars}",
   "wednesday_solutions": "Wednesday Solutions",
   "itunes_title": "Search for Music",
-  "search_text": "Searched for {searchText}"
+  "search_text": "Searched for {searchText}",
+  "track": "Track"
 }

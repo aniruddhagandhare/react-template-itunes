@@ -5,9 +5,10 @@
  * That allows to change them more easily later on.
  */
 
-const primary = '#fcedda';
+const primary = '#DF5E5E';
 const text = '#212529';
-const secondary = '#f8c49c';
+const textLight = "#999";
+const secondary = '#FDD2BF';
 const success = '#28a745';
 const error = '#dc3545';
 
@@ -19,6 +20,7 @@ const colors = {
   secondary,
   success,
   error,
+  textLight,
   theme: {
     lightMode: {
       primary,

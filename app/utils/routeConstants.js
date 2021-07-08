@@ -7,8 +7,12 @@ export default {
     },
     exact: true
   },
-  floating: {
-    route: '/floating',
+  demo: {
+    route: '/demo',
+    props: {}
+  },
+  track: {
+    route: '/track/:trackId',
     props: {}
   }
 };
