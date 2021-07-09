@@ -1,6 +1,6 @@
 import { generateApiClient } from '@utils/apiUtils';
-const repoApi = generateApiClient('itunes');
+const itunesApi = generateApiClient('itunes');
 
-export const getSongs = searchText => repoApi.get(`search?term=${searchText}`);
+export const getSongs = searchText => itunesApi.get(`search?term=${searchText}&media=music`);
 
-export const getTrack = trackId => repoApi.get(`https://itunes.apple.com/lookup?id=909253`);
+export const getTrack = trackId => itunesApi.get(`lookup?id=${trackId}`);

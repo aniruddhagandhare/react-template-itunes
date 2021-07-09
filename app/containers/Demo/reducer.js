@@ -16,7 +16,7 @@ export const initialState = {
 
 export const { Types: demoTypes, Creators: demoCreators } = createActions({
   getSongs: ['searchText'],
-  successGetSongs: ['data'],
+  successGetSongs: ['data', 'loading'],
   errorGetSongs: ['error']
 });
 
@@ -27,16 +27,12 @@ export const demoReducer = (state = initialState, action) =>
       case demoTypes.GET_SONGS:
         draft.error = '';
         draft.searchText = action.searchText;
-        if (action.searchText === '') {
-          draft.loading = false;
-          draft.songs = [];
-        } else {
-          draft.loading = true;
-        }
+        draft.loading = true
+        draft.songs = [];
         break;
       case demoTypes.SUCCESS_GET_SONGS:
         draft.error = '';
-        draft.loading = false;
+        draft.loading = action.loading;
         draft.songs = action.data.results;
         break;
       case demoTypes.ERROR_GET_SONGS:

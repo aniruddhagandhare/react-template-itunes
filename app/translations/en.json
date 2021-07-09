@@ -12,5 +12,14 @@
   "repository_stars": "Repository stars: {stars}",
   "wednesday_solutions": "Wednesday Solutions",
   "itunes_title": "Search for Music",
-  "search_text": "Searched for {searchText}"
+  "search_text": "Searched for {searchText}",
+  "track_heading": "From the Collection",
+  "track_heading_not_found": "Not from any collection",
+  "collection_name": "{collectionName}",
+  "back_to_all_tracks": "View all tracks",
+  "view_original": "View Original Track",
+  "track_name": "{trackName}",
+  "artist_name": "{artistName}",
+  "back_to_home": "Back",
+  "track_list_heading": "Search for your favourite tracks"
 }

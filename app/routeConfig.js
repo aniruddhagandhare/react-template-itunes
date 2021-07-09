@@ -1,20 +1,20 @@
 import Demo from '@containers/Demo/Loadable';
-import Floating from '@containers/FloatingButton/Loadable';
 import NotFound from '@containers/NotFoundPage/Loadable';
 import HomeContainer from '@containers/HomeContainer/Loadable';
 import routeConstants from '@utils/routeConstants';
+import Track from './containers/Track/Loadable';
 export const routeConfig = {
   repos: {
     component: HomeContainer,
     ...routeConstants.repos
   },
-  floating: {
-    component: Floating,
-    ...routeConstants.floating
-  },
   demo: {
     component: Demo,
-    route: '/demo'
+    ...routeConstants.demo
+  },
+  track: {
+    component: Track,
+    ...routeConstants.track
   },
   notFoundPage: {
     component: NotFound,
