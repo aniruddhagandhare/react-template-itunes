@@ -27,7 +27,7 @@ export const demoReducer = (state = initialState, action) =>
       case demoTypes.GET_SONGS:
         draft.error = '';
         draft.searchText = action.searchText;
-        draft.loading = true
+        draft.loading = true;
         draft.songs = [];
         break;
       case demoTypes.SUCCESS_GET_SONGS:

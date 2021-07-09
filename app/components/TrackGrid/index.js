@@ -4,19 +4,17 @@
  *
  */
 
-import React, { memo } from 'react'
-import PropTypes from 'prop-types'
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import { Card, Skeleton } from 'antd';
 import * as colors from '@app/themes/colors';
 import { Link } from 'react-router-dom';
-import { FormattedMessage as T } from 'react-intl'
-import styled from 'styled-components'
-import {fonts} from '@app/themes'
-
-
+import { FormattedMessage as T } from 'react-intl';
+import styled from 'styled-components';
+import { fonts } from '@app/themes';
 
 const CustomText = styled.small`
-  font-size: ${props => props.size === 'regular' ? fonts.size.regular() : fonts.size.small() }em;
+  font-size: ${props => (props.size === 'regular' ? fonts.size.regular() : fonts.size.small())}em;
   color: ${props => (props.color ? props.color : colors.text)};
   margin-bottom: 5px;
   display: block;
@@ -28,7 +26,6 @@ const CustomText = styled.small`
     color: inherit;
   }
 `;
-
 
 const CustomCard = styled(Card)`
   && {
@@ -56,10 +53,9 @@ const CustomCard = styled(Card)`
     audio::-webkit-media-controls-panel {
       background: ${colors.secondary};
     }
-    audio::-webkit-media-controls-play-button{
-      color: ${colors.primary}
+    audio::-webkit-media-controls-play-button {
+      color: ${colors.primary};
     }
-
   }
 `;
 
@@ -70,13 +66,7 @@ const GridCard = styled.div`
   gap: 20px;
 `;
 
-
-function TrackGrid(
-  {
-    loading,
-    songs
-  }
-) {
+function TrackGrid({ loading, songs }) {
   return (
     <GridCard>
       <Skeleton loading={loading} active>
@@ -88,11 +78,15 @@ function TrackGrid(
                   <div>
                     <CustomText color={colors.primary} size="small">
                       {song.artistName}
-                      <T id="artist_name" values={{artistName: song.artistName}} />
+                      <T id="artist_name" values={{ artistName: song.artistName }} />
                     </CustomText>
                     <CustomText size="regular" title={song.collectionName}>
                       <Link to={`/track/${song.trackId ? song.trackId : song.artistId}`}>
-                        {song.collectionName ? <T id="collection_name" values={{collectionName: song.collectionName}} /> : <T id="untitled" />}
+                        {song.collectionName ? (
+                          <T id="collection_name" values={{ collectionName: song.collectionName }} />
+                        ) : (
+                          <T id="untitled" />
+                        )}
                       </Link>
                     </CustomText>
                     <CustomText size="regular" color={colors.textLight}>
@@ -106,12 +100,12 @@ function TrackGrid(
         })}
       </Skeleton>
     </GridCard>
-  )
+  );
 }
 
 TrackGrid.propTypes = {
   loading: PropTypes.bool,
   songs: PropTypes.array
-}
+};
 
-export default memo(TrackGrid)
+export default memo(TrackGrid);

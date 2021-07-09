@@ -7,7 +7,7 @@
 
 const primary = '#DF5E5E';
 const text = '#212529';
-const textLight = "#999";
+const textLight = '#999';
 const secondary = '#FDD2BF';
 const success = '#28a745';
 const error = '#dc3545';

@@ -7,12 +7,12 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
+import { injectIntl, FormattedMessage as T } from 'react-intl';
 import { Input, Card, Skeleton } from 'antd';
 import styled from 'styled-components';
 import debounce from 'lodash/debounce';
 import { Link } from 'react-router-dom';
-import { FormattedMessage as T } from 'react-intl'
+
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { useInjectSaga } from '@utils/injectSaga';
@@ -21,7 +21,7 @@ import { demoCreators } from './reducer';
 import saga from './saga';
 import { colors } from '@app/themes/index';
 import TrackGrid from '@app/components/TrackGrid/index';
-import {fonts} from '@app/themes'
+import { fonts } from '@app/themes';
 
 // styled components
 const BackLink = styled.div`
@@ -74,9 +74,10 @@ export function Demo({ dispatchGetSongs, songs, loading, error, searchText }) {
   const debouncedHandleOnChange = debounce(handleOnChange, 200);
   return (
     <CenteredDiv>
-      
       <BackLink>
-        <Link to="/"><T id="back_to_home" /></Link>
+        <Link to="/">
+          <T id="back_to_home" />
+        </Link>
       </BackLink>
       <Card title={<T id="track_list_heading" />}>
         <FlexWrapper>
