@@ -7,30 +7,30 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
+import { injectIntl, FormattedMessage as T } from 'react-intl';
 import { Input, Card, Skeleton } from 'antd';
 import styled from 'styled-components';
 import debounce from 'lodash/debounce';
 import { Link } from 'react-router-dom';
+
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { useInjectSaga } from '@utils/injectSaga';
 import makeSelectDemo, { selectError, selectSearchText, selectSongs, selectLoading } from './selectors';
 import { demoCreators } from './reducer';
 import saga from './saga';
-import * as colors from '@app/themes/colors';
+import { colors } from '@app/themes/index';
 import TrackGrid from '@app/components/TrackGrid/index';
+import { fonts } from '@app/themes';
 
 // styled components
-
 const BackLink = styled.div`
   a {
     color: ${colors.text};
     font-weight: bold;
-    font-size: 1em;
+    ${fonts.size.regular()}
     display: block;
     margin-bottom: 30px;
-
     &:hover {
       color: ${colors.primary};
     }
@@ -61,8 +61,8 @@ const FlexWrapper = styled.div`
 `;
 
 const CenteredDiv = styled.div`
-  max-width: 1100px;
-  margin: 30px auto;
+  max-width: ${1100 / 16}em;
+  margin: ${30 / 16}em auto;
   padding: 0 20px;
 `;
 
@@ -75,9 +75,11 @@ export function Demo({ dispatchGetSongs, songs, loading, error, searchText }) {
   return (
     <CenteredDiv>
       <BackLink>
-        <Link to="/">Back</Link>
+        <Link to="/">
+          <T id="back_to_home" />
+        </Link>
       </BackLink>
-      <Card title="Listen to your Favourite Tracks">
+      <Card title={<T id="track_list_heading" />}>
         <FlexWrapper>
           <CustomInput
             onChange={e => debouncedHandleOnChange(e.target.value)}
