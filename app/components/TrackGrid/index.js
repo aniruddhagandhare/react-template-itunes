@@ -18,7 +18,7 @@ const CustomText = styled.small`
   color: ${props => (props.color ? props.color : colors.text)};
   margin-bottom: 5px;
   display: block;
-  width: 280px;
+  width: 18em;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -39,7 +39,7 @@ const CustomCard = styled(Card)`
       height: 100%;
     }
     .ant-card-cover {
-      height: 250px;
+      height: 16em;
     }
     img {
       width: 100%;
@@ -48,7 +48,7 @@ const CustomCard = styled(Card)`
     }
     audio {
       width: 100%;
-      margin-top: 20px;
+      margin-top: 1.5;
     }
     audio::-webkit-media-controls-panel {
       background: ${colors.secondary};
@@ -61,15 +61,15 @@ const CustomCard = styled(Card)`
 
 const GridCard = styled.div`
   display: grid;
-  margin-top: 30px;
+  margin-top: 2em;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  gap: 1.5em;
 `;
 
-function TrackGrid({ loading, songs }) {
+function TrackGrid({ songs, loading }) {
   return (
-    <GridCard>
-      <Skeleton loading={loading} active>
+    <Skeleton loading={loading} active>
+      <GridCard>
         {songs.map((song, idx) => {
           if (song.wrapperType === 'track') {
             return (
@@ -77,15 +77,14 @@ function TrackGrid({ loading, songs }) {
                 <div className="inner-wrapper">
                   <div>
                     <CustomText color={colors.primary} size="small">
-                      {song.artistName}
                       <T id="artist_name" values={{ artistName: song.artistName }} />
                     </CustomText>
                     <CustomText size="regular" title={song.collectionName}>
-                      <Link to={`/track/${song.trackId ? song.trackId : song.artistId}`}>
-                        {song.collectionName ? (
-                          <T id="collection_name" values={{ collectionName: song.collectionName }} />
+                      <Link to={`/track/${song.trackId}`}>
+                        {song.trackName ? (
+                          <T id="collection_name" values={{ collectionName: song.trackName }} />
                         ) : (
-                          <T id="untitled" />
+                          <T id="collection_name" values={{ collectionName: song.collectionName }} />
                         )}
                       </Link>
                     </CustomText>
@@ -98,8 +97,8 @@ function TrackGrid({ loading, songs }) {
             );
           }
         })}
-      </Skeleton>
-    </GridCard>
+      </GridCard>
+    </Skeleton>
   );
 }
 

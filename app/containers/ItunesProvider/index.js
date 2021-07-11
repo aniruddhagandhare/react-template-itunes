@@ -20,7 +20,7 @@ import makeSelectDemo, { selectError, selectSearchText, selectSongs, selectLoadi
 import { demoCreators } from './reducer';
 import saga from './saga';
 import { colors } from '@app/themes/index';
-import TrackGrid from '@app/components/TrackGrid/index';
+import TrackGrid from '@app/components/TrackGrid';
 import { fonts } from '@app/themes';
 
 // styled components

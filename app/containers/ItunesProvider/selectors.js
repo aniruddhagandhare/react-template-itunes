@@ -42,5 +42,11 @@ export const selectSearchText = () =>
     substate => get(substate, 'searchText', false)
   );
 
+export const selectTrack = () =>
+  createSelector(
+    selectDemoDomain,
+    substate => get(substate, 'track', null)
+  );
+
 export default makeSelectDemo;
 export { selectDemoDomain };

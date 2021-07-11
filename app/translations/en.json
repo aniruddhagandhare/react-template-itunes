@@ -21,5 +21,6 @@
   "track_name": "{trackName}",
   "artist_name": "{artistName}",
   "back_to_home": "Back",
-  "track_list_heading": "Search for your favourite tracks"
+  "track_list_heading": "Search for your favourite tracks",
+  "error": "{error}"
 }

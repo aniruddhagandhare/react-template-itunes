@@ -8,8 +8,7 @@ import { connectRouter } from 'connected-react-router';
 import history from 'utils/history';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import homeContainerReducer from 'containers/HomeContainer/reducer';
-import demoContainerReducer from 'containers/Demo/reducer';
-import trackContainerReducer from 'containers/Track/reducer';
+import itunesContainerReducer from '@app/containers/ItunesProvider/reducer';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -19,8 +18,7 @@ export default function createReducer() {
     language: languageProviderReducer,
     router: connectRouter(history),
     homeContainer: homeContainerReducer,
-    demoContainer: demoContainerReducer,
-    trackContainer: trackContainerReducer
+    demoContainer: itunesContainerReducer
   });
   return rootReducer;
 }
