@@ -7,11 +7,10 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Card, Skeleton } from 'antd';
-import * as colors from '@app/themes/colors';
 import { Link } from 'react-router-dom';
 import { FormattedMessage as T } from 'react-intl';
 import styled from 'styled-components';
-import { fonts } from '@app/themes';
+import { fonts, colors } from '@app/themes';
 
 const CustomText = styled.small`
   font-size: ${props => (props.size === 'regular' ? fonts.size.regular() : fonts.size.small())}em;
