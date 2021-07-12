@@ -19,9 +19,9 @@ import { useInjectSaga } from '@utils/injectSaga';
 import makeSelectDemo, { selectError, selectSearchText, selectSongs, selectLoading } from './selectors';
 import { demoCreators } from './reducer';
 import saga from './saga';
-import { colors } from '@app/themes/index';
 import TrackGrid from '@app/components/TrackGrid/index';
-import { fonts } from '@app/themes';
+import { fonts, colors, styles } from '@app/themes';
+import { isEmpty } from 'lodash';
 
 // styled components
 const BackLink = styled.div`
@@ -30,7 +30,7 @@ const BackLink = styled.div`
     font-weight: bold;
     ${fonts.size.regular()}
     display: block;
-    margin-bottom: 30px;
+    margin-bottom: 1.5em;
     &:hover {
       color: ${colors.primary};
     }
@@ -39,18 +39,17 @@ const BackLink = styled.div`
 
 const CustomInput = styled(Input)`
   && {
-    padding: 12px;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.04);
+    padding: .8em;
     background-color: inherit;
-    border: 1px solid #e8e8e8;
+    ${styles.borderWithRadius(1, 'solid', 'e8e8e8', 0)}
     transition: all 0.2s;
     &:hover {
-      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.04);
+      ${styles.boxShadow(3, 3, 5, 0, `rgba(0,0,0,0.04)`)}
       border: 1px solid #e8e8e8;
     }
     &:focus {
-      box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.04);
-      border: 1px solid #e8e8e8;
+      ${styles.boxShadow(3, 3, 5, 0, `rgba(0,0,0,0.04)`)}
+      ${styles.borderWithRadius(1, 'solid', 'e8e8e8', 0)}
       border-bottom: 1px solid ${colors.primary};
     }
   }
@@ -61,14 +60,18 @@ const FlexWrapper = styled.div`
 `;
 
 const CenteredDiv = styled.div`
-  max-width: ${1100 / 16}em;
-  margin: ${30 / 16}em auto;
-  padding: 0 20px;
+  max-width: 80em;
+  margin: 1.5em auto;
+  padding: 0 1.4em;
 `;
 
-export function Demo({ dispatchGetSongs, songs, loading, error, searchText }) {
+export function Demo({ dispatchGetSongs, dispatchClearSongs, songs, loading }) {
   useInjectSaga({ key: 'demo', saga });
   const handleOnChange = searchText => {
+    if (isEmpty(searchText)) {
+      dispatchClearSongs();
+      return;
+    }
     dispatchGetSongs(searchText);
   };
   const debouncedHandleOnChange = debounce(handleOnChange, 200);
@@ -87,7 +90,9 @@ export function Demo({ dispatchGetSongs, songs, loading, error, searchText }) {
           ></CustomInput>
         </FlexWrapper>
       </Card>
-      {!loading ? <TrackGrid songs={songs} loading={loading} /> : <Skeleton></Skeleton>}
+      <Skeleton loading={loading} active>
+        <TrackGrid songs={songs} loading={loading} />
+      </Skeleton>
     </CenteredDiv>
   );
 }
@@ -96,6 +101,7 @@ Demo.propTypes = {
   songs: PropTypes.array,
   loading: PropTypes.bool,
   dispatchGetSongs: PropTypes.func,
+  dispatchClearSongs: PropTypes.func,
   error: PropTypes.string,
   searchText: PropTypes.string
 };
@@ -109,9 +115,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 function mapDispatchToProps(dispatch) {
-  const { getSongs } = demoCreators;
+  const { requestGetSongs, clearSongs } = demoCreators;
   return {
-    dispatchGetSongs: searchText => dispatch(getSongs(searchText))
+    dispatchGetSongs: searchText => dispatch(requestGetSongs(searchText)),
+    dispatchClearSongs: () => dispatch(clearSongs())
   };
 }
 

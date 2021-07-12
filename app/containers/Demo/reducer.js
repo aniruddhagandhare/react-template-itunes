@@ -6,6 +6,7 @@
 import produce from 'immer';
 import { createActions } from 'reduxsauce';
 import { get } from 'lodash';
+import { translate } from '@app/components/IntlGlobalProvider';
 
 export const initialState = {
   songs: [],
@@ -15,16 +16,17 @@ export const initialState = {
 };
 
 export const { Types: demoTypes, Creators: demoCreators } = createActions({
-  getSongs: ['searchText'],
+  requestGetSongs: ['searchText'],
   successGetSongs: ['data', 'loading'],
-  errorGetSongs: ['error']
+  errorGetSongs: ['error'],
+  clearSongs: []
 });
 
 /* eslint-disable default-case, no-param-reassign */
 export const demoReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case demoTypes.GET_SONGS:
+      case demoTypes.REQUEST_GET_SONGS:
         draft.error = '';
         draft.searchText = action.searchText;
         draft.loading = true;
@@ -35,9 +37,11 @@ export const demoReducer = (state = initialState, action) =>
         draft.loading = action.loading;
         draft.songs = action.data.results;
         break;
+      case demoTypes.CLEAR_SONGS:
+        return initialState;
       case demoTypes.ERROR_GET_SONGS:
         draft.loading = false;
-        draft.error = get(action.error, 'message', 'something went wrong!!!');
+        draft.error = get(action.error, 'message', translate('something went wrong!!!'));
         break;
     }
   });

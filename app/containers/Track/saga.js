@@ -3,9 +3,9 @@ import { getTrack } from '@services/itunesApi';
 import { trackTypes, trackCreators } from './reducer';
 
 // Individual exports for testing
-const { GET_TRACK_BY_ID } = trackTypes;
+const { REQUEST_GET_TRACK_BY_ID } = trackTypes;
 const { successGetTrackById, errorGetTrackById } = trackCreators;
-export function* defaultFunction(action) {
+export function* getTrackFromItunes(action) {
   const response = yield call(getTrack, action.trackId);
   const { ok, data } = response;
   if (ok) {
@@ -16,5 +16,5 @@ export function* defaultFunction(action) {
 }
 
 export default function* trackSaga() {
-  yield takeLatest(GET_TRACK_BY_ID, defaultFunction);
+  yield takeLatest(REQUEST_GET_TRACK_BY_ID, getTrackFromItunes);
 }
