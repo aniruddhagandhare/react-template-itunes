@@ -11,6 +11,7 @@
   "repository_full_name": "Repository full name: {fullName}",
   "repository_stars": "Repository stars: {stars}",
   "wednesday_solutions": "Wednesday Solutions",
+  "link_to_itunes": "Visit Itunes Application",
   "itunes_title": "Search for Music",
   "search_text": "Searched for {searchText}",
   "track_heading": "From the Collection ",

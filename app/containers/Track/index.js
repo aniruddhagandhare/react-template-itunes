@@ -11,7 +11,6 @@ import { injectIntl, FormattedMessage as T } from 'react-intl';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Skeleton } from 'antd';
-
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { useInjectSaga } from '@utils/injectSaga';
@@ -33,6 +32,8 @@ const CustomLink = styled(Link)`
   && {
     ${fonts.size.small()};
     color: ${colors.primary};
+    display: block;
+    margin-bottom: ${props => props.mb ? `${props.mb}em` : 0};
   }
 `;
 export function Track({ track, dispatchGetTrackById, match }) {
@@ -44,12 +45,10 @@ export function Track({ track, dispatchGetTrackById, match }) {
   }, []);
   return (
     <TrackWrapper>
-      <CustomLink to="/demo">
+      <CustomLink to="/demo" mb="2">
         <T id="back_to_all_tracks" />
       </CustomLink>
-      <br />
-      <br />
-      <If condition={track !== null} otherwise={<Skeleton active />}>
+      <If condition={track} otherwise={<Skeleton active />}>
         <IndividualTrack track={track} showInfo={true} />
       </If>
     </TrackWrapper>

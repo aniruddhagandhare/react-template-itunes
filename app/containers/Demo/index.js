@@ -28,7 +28,7 @@ const BackLink = styled.div`
   a {
     color: ${colors.text};
     font-weight: bold;
-    ${fonts.size.regular()}
+    ${fonts.size.regular()};
     display: block;
     margin-bottom: 1.5em;
     &:hover {
@@ -36,7 +36,6 @@ const BackLink = styled.div`
     }
   }
 `;
-
 const CustomInput = styled(Input)`
   && {
     padding: 0.8em;
@@ -54,11 +53,9 @@ const CustomInput = styled(Input)`
     }
   }
 `;
-
 const FlexWrapper = styled.div`
   display: flex;
 `;
-
 const CenteredDiv = styled.div`
   max-width: 80em;
   margin: 1.5em auto;

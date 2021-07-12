@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Card, Typography } from 'antd';
 import { PauseOutlined, CaretRightFilled } from '@ant-design/icons';
 import T from '@components/T';
-import If from '../If';
+import If from '@components/If';
 import { colors, media } from '@app/themes';
 
 const CustomCard = styled.div`
