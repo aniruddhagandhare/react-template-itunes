@@ -7,21 +7,21 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { injectIntl, FormattedMessage as T } from 'react-intl';
+import { injectIntl, useIntl } from 'react-intl';
 import { Input, Card, Skeleton } from 'antd';
 import styled from 'styled-components';
 import debounce from 'lodash/debounce';
 import { Link } from 'react-router-dom';
-
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { useInjectSaga } from '@utils/injectSaga';
-import makeSelectDemo, { selectError, selectSearchText, selectSongs, selectLoading } from './selectors';
-import { demoCreators } from './reducer';
-import saga from './saga';
-import TrackGrid from '@app/components/TrackGrid/index';
-import { fonts, colors, styles } from '@app/themes';
 import { isEmpty } from 'lodash';
+import { useInjectSaga } from '@utils/injectSaga';
+import T from '@components/T'
+import TrackGrid from '@app/components/TrackGrid';
+import makeSelectDemo, { selectError, selectSearchText, selectSongs, selectLoading } from './selectors';
+import saga from './saga';
+import { demoCreators } from './reducer';
+import { fonts, colors, styles } from '@app/themes';
 
 // styled components
 const BackLink = styled.div`
@@ -41,15 +41,15 @@ const CustomInput = styled(Input)`
   && {
     padding: .8em;
     background-color: inherit;
-    ${styles.borderWithRadius(1, 'solid', 'e8e8e8', 0)}
+    ${styles.borderWithRadius(1, 'solid', colors.border, 0)};
     transition: all 0.2s;
     &:hover {
-      ${styles.boxShadow(3, 3, 5, 0, `rgba(0,0,0,0.04)`)}
-      border: 1px solid #e8e8e8;
+      ${styles.boxShadowFixed};
+      border: 1px solid ${colors.border};
     }
     &:focus {
-      ${styles.boxShadow(3, 3, 5, 0, `rgba(0,0,0,0.04)`)}
-      ${styles.borderWithRadius(1, 'solid', 'e8e8e8', 0)}
+      ${styles.boxShadowFixed};
+      ${styles.borderWithRadius(1, 'solid', colors.border, 0)};
       border-bottom: 1px solid ${colors.primary};
     }
   }
@@ -74,6 +74,7 @@ export function Demo({ dispatchGetSongs, dispatchClearSongs, songs, loading }) {
     }
     dispatchGetSongs(searchText);
   };
+  const {formatMessage} = useIntl()
   const debouncedHandleOnChange = debounce(handleOnChange, 200);
   return (
     <CenteredDiv>
@@ -86,7 +87,7 @@ export function Demo({ dispatchGetSongs, dispatchClearSongs, songs, loading }) {
         <FlexWrapper>
           <CustomInput
             onChange={e => debouncedHandleOnChange(e.target.value)}
-            placeholder="Search iTunes"
+            placeholder={formatMessage({id: 'placeholder'})}
           ></CustomInput>
         </FlexWrapper>
       </Card>

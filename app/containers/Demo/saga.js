@@ -4,10 +4,7 @@ import { getSongs } from '@services/itunesApi';
 // Individual exports for testing
 const { REQUEST_GET_SONGS } = demoTypes;
 const { successGetSongs, errorGetSongs } = demoCreators;
-export function* getSongsFromItune(action) {
-  if (action.searchText === '') {
-    return;
-  }
+export function* getSongsFromItunes(action) {
   const response = yield call(getSongs, action.searchText);
   const { data, ok } = response;
   if (ok) {
@@ -18,5 +15,5 @@ export function* getSongsFromItune(action) {
 }
 
 export default function* demoSaga() {
-  yield takeLatest(REQUEST_GET_SONGS, getSongsFromItune);
+  yield takeLatest(REQUEST_GET_SONGS, getSongsFromItunes);
 }

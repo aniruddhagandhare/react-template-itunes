@@ -98,7 +98,12 @@ const boxShadow = (hOffset = 0, vOffset = 0, blur = 0, spread = 0, color = '#ccc
   css`
     box-shadow: ${hOffset}px ${vOffset}px ${blur}px ${spread}px ${color};
   `;
-
+  
+const boxShadowFixed = () => {
+  css`
+    box-shadow: 3px 3px 5px ${colors.shadow};
+  `;
+}
 const primaryBackgroundColor = () =>
   css`
     background-color: ${colors.accent};
@@ -138,5 +143,6 @@ export default {
     rowCenter,
     unequalColumns
   },
-  boxShadow
+  boxShadow,
+  boxShadowFixed
 };

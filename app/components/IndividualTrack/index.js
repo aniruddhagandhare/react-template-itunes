@@ -1,13 +1,12 @@
 import React, { memo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Card, Typography } from 'antd';
 import { PauseOutlined, CaretRightFilled } from '@ant-design/icons';
+import T from '@components/T'
+import If from '../If';
 import { colors, media } from '@app/themes';
-import { Link } from 'react-router-dom';
-
-import { FormattedMessage as T } from 'react-intl';
-import If from '../If/index';
 
 const CustomCard = styled.div`
   display: grid;
@@ -25,10 +24,14 @@ const CustomCard = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
     audio {
       width: 100%;
     }
+  }
+`;
+const StyledT = styled(T)`
+  && {
+    display: inline;
   }
 `;
 const AudioButton = styled.div`
@@ -52,6 +55,7 @@ const AudioContainer = styled.div`
   align-items: center;
 `;
 
+
 const Slider = styled.div`
   margin-left: 1em;
   border-radius: 1em;
@@ -60,48 +64,42 @@ const Slider = styled.div`
 `;
 const { Text } = Typography;
 
-function Track({ track, individual }) {
+function Track({ track, showInfo }) {
   const audioRef = useRef(null);
   const [playing, setPlaying] = useState(false);
   const currentTimeRef = useRef(null);
 
   const togglePlayState = () => {
-    if (!playing) {
-      setPlaying(!playing);
-      audioRef.current.play();
-    } else {
-      setPlaying(!playing);
-      audioRef.current.pause();
-    }
+    playing ? audioRef.current.pause() : audioRef.current.play();
+    setPlaying(!playing);
   };
-  audioRef &&
-    audioRef.current &&
-    audioRef.current.addEventListener(
-      'timeupdate',
-      e => (currentTimeRef.current.style.width = (audioRef.current.currentTime / audioRef.current.duration) * 100 + '%')
-    );
+  audioRef?.current?.addEventListener(
+    'timeupdate',
+    e => (currentTimeRef.current.style.width = (audioRef.current.currentTime / audioRef.current.duration) * 100 + '%')
+  );
+
   return (
     <Card
       title={
         <div>
-          <Link style={{ color: colors.primary }} to={`track/${track.trackId}`}>
-            <T id="track_name" values={{ trackName: track.trackName }} />
+          <Link style={{ color: colors.primary }} to={`/track/${track.trackId}`}>
+            <StyledT id="track_name" values={{ trackName: track.trackName }} />
           </Link>
-          <If condition={individual}>
-            {` by `}
+          <If condition={showInfo}>
+            <StyledT id="by" />
             <a
               target="_blank"
               style={{ color: track.artistViewUrl ? colors.primary : colors.text }}
               href={track.artistViewUrl}
               rel="noreferrer"
             >
-              <T id="artist_name" values={{ artistName: track.artistName }} />
+              <StyledT id="artist_name" values={{ artistName: track.artistName }} />
             </a>
           </If>
         </div>
       }
       extra={
-        individual && (
+        showInfo && (
           <a style={{ color: colors.primary }} target="_blank" href={track.trackViewUrl} rel="noreferrer">
             <T id="view_original" />
           </a>
@@ -112,18 +110,12 @@ function Track({ track, individual }) {
         <img src={track.artworkUrl100} />
         <div className="inner-container">
           <Text>
-            <T id="track_heading" />
-            {' - '}
-            <strong>
-              {track.collectionName ? (
-                <T id="collection_name" values={{ collectionName: track.collectionName }} />
-              ) : (
-                <T id="track_heading_not_found" />
-              )}
-            </strong>
+            <StyledT type="subtext" id="track_heading" />
+            <If condition={track.collectionName} otherwise={<StyledT id="track_heading_not_found" />}>
+              <StyledT type="standard" id="collection_name" values={{ collectionName: track.collectionName }} />
+            </If>
           </Text>
-          <br></br>
-          <If condition={individual}>
+          <If condition={showInfo}>
             <audio ref={audioRef} preload="auto">
               <source src={track.previewUrl}></source>
             </audio>
@@ -140,7 +132,7 @@ function Track({ track, individual }) {
 
 Track.propTypes = {
   track: PropTypes.object,
-  individual: PropTypes.bool
+  showInfo: PropTypes.bool
 };
 
 export default memo(Track);

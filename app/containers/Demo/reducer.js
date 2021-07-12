@@ -10,9 +10,9 @@ import { translate } from '@app/components/IntlGlobalProvider';
 
 export const initialState = {
   songs: [],
-  error: '',
+  error: null,
   loading: false,
-  searchText: ''
+  searchText: null
 };
 
 export const { Types: demoTypes, Creators: demoCreators } = createActions({
@@ -27,13 +27,13 @@ export const demoReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case demoTypes.REQUEST_GET_SONGS:
-        draft.error = '';
+        draft.error = null;
         draft.searchText = action.searchText;
         draft.loading = true;
-        draft.songs = [];
+        draft.songs = null;
         break;
       case demoTypes.SUCCESS_GET_SONGS:
-        draft.error = '';
+        draft.error = null;
         draft.loading = action.loading;
         draft.songs = action.data.results;
         break;

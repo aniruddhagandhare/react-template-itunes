@@ -31,8 +31,8 @@ const TrackWrapper = styled.div`
 `;
 const CustomLink = styled(Link)`
   && {
-    ${fonts.size.small()}
-    color: ${colors.primary}
+    ${fonts.size.small()};
+    color: ${colors.primary};
   }
 `;
 export function Track({ track, dispatchGetTrackById, match }) {
@@ -50,7 +50,7 @@ export function Track({ track, dispatchGetTrackById, match }) {
       <br />
       <br />
       <If condition={track !== null} otherwise={<Skeleton active />}>
-        <IndividualTrack track={track} individual={true} />
+        <IndividualTrack track={track} showInfo={true} />
       </If>
     </TrackWrapper>
   );

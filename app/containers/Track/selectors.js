@@ -19,7 +19,7 @@ const makeSelectTrack = () =>
 export const selectTrack = () =>
   createSelector(
     selectTrackDomain,
-    substate => get(substate, 'track', {})
+    substate => get(substate, 'track', null)
   );
 
 export default makeSelectTrack;

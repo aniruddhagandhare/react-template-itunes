@@ -8,7 +8,7 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import IndividualTrack from '../IndividualTrack/index';
-
+import For from '@components/For'
 const GridCard = styled.div`
   display: grid;
   margin-top: 2em;
@@ -18,16 +18,16 @@ const GridCard = styled.div`
 
 function TrackGrid({ songs }) {
   return (
-    <GridCard>
-      {songs.map((song, idx) => {
-        return <IndividualTrack track={song} key={idx} />;
-      })}
-    </GridCard>
+    <For 
+      of={songs}
+      isRow={false}
+      ParentComponent={GridCard}
+      renderItem={(song, idx) => <IndividualTrack track={song} key={idx} />}
+    />
   );
 }
 
 TrackGrid.propTypes = {
-  loading: PropTypes.bool,
   songs: PropTypes.array
 };
 
