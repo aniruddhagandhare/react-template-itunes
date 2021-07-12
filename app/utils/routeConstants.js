@@ -6,5 +6,13 @@ export default {
       padding: 20
     },
     exact: true
+  },
+  demo: {
+    route: '/demo',
+    props: {}
+  },
+  track: {
+    route: '/track/:trackId',
+    props: {}
   }
 };
