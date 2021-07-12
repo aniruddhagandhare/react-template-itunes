@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Card, Typography } from 'antd';
 import { PauseOutlined, CaretRightFilled } from '@ant-design/icons';
-import T from '@components/T'
+import T from '@components/T';
 import If from '../If';
 import { colors, media } from '@app/themes';
 
@@ -49,13 +49,10 @@ const AudioButton = styled.div`
     width: 1.4em;
   }
 `;
-
 const AudioContainer = styled.div`
   display: flex;
   align-items: center;
 `;
-
-
 const Slider = styled.div`
   margin-left: 1em;
   border-radius: 1em;

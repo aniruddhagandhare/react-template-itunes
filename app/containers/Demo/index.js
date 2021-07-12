@@ -16,7 +16,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { isEmpty } from 'lodash';
 import { useInjectSaga } from '@utils/injectSaga';
-import T from '@components/T'
+import T from '@components/T';
 import TrackGrid from '@app/components/TrackGrid';
 import makeSelectDemo, { selectError, selectSearchText, selectSongs, selectLoading } from './selectors';
 import saga from './saga';
@@ -39,16 +39,16 @@ const BackLink = styled.div`
 
 const CustomInput = styled(Input)`
   && {
-    padding: .8em;
+    padding: 0.8em;
     background-color: inherit;
     ${styles.borderWithRadius(1, 'solid', colors.border, 0)};
     transition: all 0.2s;
     &:hover {
-      ${styles.boxShadowFixed};
+      ${styles.boxShadowFixed()};
       border: 1px solid ${colors.border};
     }
     &:focus {
-      ${styles.boxShadowFixed};
+      ${styles.boxShadowFixed()};
       ${styles.borderWithRadius(1, 'solid', colors.border, 0)};
       border-bottom: 1px solid ${colors.primary};
     }
@@ -74,7 +74,7 @@ export function Demo({ dispatchGetSongs, dispatchClearSongs, songs, loading }) {
     }
     dispatchGetSongs(searchText);
   };
-  const {formatMessage} = useIntl()
+  const { formatMessage } = useIntl();
   const debouncedHandleOnChange = debounce(handleOnChange, 200);
   return (
     <CenteredDiv>
@@ -87,7 +87,7 @@ export function Demo({ dispatchGetSongs, dispatchClearSongs, songs, loading }) {
         <FlexWrapper>
           <CustomInput
             onChange={e => debouncedHandleOnChange(e.target.value)}
-            placeholder={formatMessage({id: 'placeholder'})}
+            placeholder={formatMessage({ id: 'placeholder' })}
           ></CustomInput>
         </FlexWrapper>
       </Card>
