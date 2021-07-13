@@ -134,8 +134,9 @@ export function HomeContainer({
       <RightContent>
         <Clickable textId="stories" onClick={refreshPage} />
       </RightContent>
-      <Link to="/demo"><T id="link_to_itunes" /></Link>
-      
+      <Link to="/demo">
+        <T id="link_to_itunes" />
+      </Link>
 
       <CustomCard title={intl.formatMessage({ id: 'repo_search' })} maxwidth={maxwidth}>
         <T marginBottom={10} id="get_repo_details" />

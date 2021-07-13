@@ -5,7 +5,13 @@ import { selectSongs } from './selectors';
 import { isEmpty } from 'lodash';
 
 const { REQUEST_GET_SONGS, REQUEST_GET_TRACK_BY_ID } = itunesTypes;
-const { successGetSongs, errorGetSongs, successGetTrackById, errorGetTrackById, successFetchTrackById } = itunesCreators;
+const {
+  successGetSongs,
+  errorGetSongs,
+  successGetTrackById,
+  errorGetTrackById,
+  successFetchTrackById
+} = itunesCreators;
 
 export function* getSongsFromItunes(action) {
   const response = yield call(getSongs, action.searchText);

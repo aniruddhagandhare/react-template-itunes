@@ -16,7 +16,7 @@ import { compose } from 'redux';
 import { isEmpty } from 'lodash';
 import { useInjectSaga } from '@utils/injectSaga';
 import T from '@components/T';
-import If from '@components/If'
+import If from '@components/If';
 import TrackGrid from '@app/components/TrackGrid';
 import { fonts, colors, styles } from '@app/themes';
 import makeSelectDemo, { selectError, selectSearchText, selectSongs, selectLoading } from '../selectors';
