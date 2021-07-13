@@ -33,7 +33,7 @@ const CustomLink = styled(Link)`
     ${fonts.size.small()};
     color: ${colors.primary};
     display: block;
-    margin-bottom: ${props => props.mb ? `${props.mb}em` : 0};
+    margin-bottom: ${props => (props.mb ? `${props.mb}em` : 0)};
   }
 `;
 export function Track({ track, dispatchGetTrackById, match }) {
