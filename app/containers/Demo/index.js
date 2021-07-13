@@ -7,85 +7,90 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
+import { injectIntl, useIntl } from 'react-intl';
 import { Input, Card, Skeleton } from 'antd';
 import styled from 'styled-components';
 import debounce from 'lodash/debounce';
 import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { isEmpty } from 'lodash';
 import { useInjectSaga } from '@utils/injectSaga';
+import T from '@components/T';
+import TrackGrid from '@app/components/TrackGrid';
 import makeSelectDemo, { selectError, selectSearchText, selectSongs, selectLoading } from './selectors';
-import { demoCreators } from './reducer';
 import saga from './saga';
-import * as colors from '@app/themes/colors';
-import TrackGrid from '@app/components/TrackGrid/index';
+import { demoCreators } from './reducer';
+import { fonts, colors, styles } from '@app/themes';
 
 // styled components
-
 const BackLink = styled.div`
   a {
     color: ${colors.text};
     font-weight: bold;
-    font-size: 1em;
+    ${fonts.size.regular()};
     display: block;
-    margin-bottom: 30px;
-
+    margin-bottom: 1.5em;
     &:hover {
       color: ${colors.primary};
     }
   }
 `;
-
 const CustomInput = styled(Input)`
   && {
-    padding: 12px;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.04);
+    padding: 0.8em;
     background-color: inherit;
-    border: 1px solid #e8e8e8;
+    ${styles.borderWithRadius(1, 'solid', colors.border, 0)};
     transition: all 0.2s;
     &:hover {
-      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.04);
-      border: 1px solid #e8e8e8;
+      ${styles.boxShadowFixed()};
+      border: 1px solid ${colors.border};
     }
     &:focus {
-      box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.04);
-      border: 1px solid #e8e8e8;
+      ${styles.boxShadowFixed()};
+      ${styles.borderWithRadius(1, 'solid', colors.border, 0)};
       border-bottom: 1px solid ${colors.primary};
     }
   }
 `;
-
 const FlexWrapper = styled.div`
   display: flex;
 `;
-
 const CenteredDiv = styled.div`
-  max-width: 1100px;
-  margin: 30px auto;
-  padding: 0 20px;
+  max-width: 80em;
+  margin: 1.5em auto;
+  padding: 0 1.4em;
 `;
 
-export function Demo({ dispatchGetSongs, songs, loading, error, searchText }) {
+export function Demo({ dispatchGetSongs, dispatchClearSongs, songs, loading }) {
   useInjectSaga({ key: 'demo', saga });
   const handleOnChange = searchText => {
+    if (isEmpty(searchText)) {
+      dispatchClearSongs();
+      return;
+    }
     dispatchGetSongs(searchText);
   };
+  const { formatMessage } = useIntl();
   const debouncedHandleOnChange = debounce(handleOnChange, 200);
   return (
     <CenteredDiv>
       <BackLink>
-        <Link to="/">Back</Link>
+        <Link to="/">
+          <T id="back_to_home" />
+        </Link>
       </BackLink>
-      <Card title="Listen to your Favourite Tracks">
+      <Card title={<T id="track_list_heading" />}>
         <FlexWrapper>
           <CustomInput
             onChange={e => debouncedHandleOnChange(e.target.value)}
-            placeholder="Search iTunes"
+            placeholder={formatMessage({ id: 'placeholder' })}
           ></CustomInput>
         </FlexWrapper>
       </Card>
-      {!loading ? <TrackGrid songs={songs} loading={loading} /> : <Skeleton></Skeleton>}
+      <Skeleton loading={loading} active>
+        <TrackGrid songs={songs} loading={loading} />
+      </Skeleton>
     </CenteredDiv>
   );
 }
@@ -94,6 +99,7 @@ Demo.propTypes = {
   songs: PropTypes.array,
   loading: PropTypes.bool,
   dispatchGetSongs: PropTypes.func,
+  dispatchClearSongs: PropTypes.func,
   error: PropTypes.string,
   searchText: PropTypes.string
 };
@@ -107,9 +113,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 function mapDispatchToProps(dispatch) {
-  const { getSongs } = demoCreators;
+  const { requestGetSongs, clearSongs } = demoCreators;
   return {
-    dispatchGetSongs: searchText => dispatch(getSongs(searchText))
+    dispatchGetSongs: searchText => dispatch(requestGetSongs(searchText)),
+    dispatchClearSongs: () => dispatch(clearSongs())
   };
 }
 
