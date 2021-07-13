@@ -1,80 +1,77 @@
 /**
  *
- * Demo
+ * ItunesHome
  *
  */
-
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { injectIntl, FormattedMessage as T } from 'react-intl';
-import { Input, Card } from 'antd';
+import { injectIntl, useIntl } from 'react-intl';
+import { Input, Card, Skeleton, Alert } from 'antd';
 import styled from 'styled-components';
 import debounce from 'lodash/debounce';
 import { Link } from 'react-router-dom';
-
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { isEmpty } from 'lodash';
 import { useInjectSaga } from '@utils/injectSaga';
+import T from '@components/T';
+import If from '@components/If'
+import TrackGrid from '@app/components/TrackGrid';
+import { fonts, colors, styles } from '@app/themes';
 import makeSelectDemo, { selectError, selectSearchText, selectSongs, selectLoading } from '../selectors';
-import { demoCreators } from '../reducer';
 import saga from '../saga';
-import { colors } from '@app/themes/index';
-import TrackGrid from '@app/components/TrackGrid/index';
-import { fonts } from '@app/themes';
+import { itunesCreators } from '../reducer';
 
 // styled components
 const BackLink = styled.div`
   a {
     color: ${colors.text};
     font-weight: bold;
-    ${fonts.size.regular()}
+    ${fonts.size.regular()};
     display: block;
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
     &:hover {
       color: ${colors.primary};
     }
   }
 `;
-
 const CustomInput = styled(Input)`
   && {
-    padding: 0.7em;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.04);
+    padding: 0.8em;
     background-color: inherit;
-    border: 1px solid #e8e8e8;
+    ${styles.borderWithRadius(1, 'solid', colors.border, 0)};
     transition: all 0.2s;
     &:hover {
-      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.04);
-      border: 1px solid #e8e8e8;
+      ${styles.boxShadowFixed()};
+      border: 1px solid ${colors.border};
     }
     &:focus {
-      box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.04);
-      border: 1px solid #e8e8e8;
+      ${styles.boxShadowFixed()};
+      ${styles.borderWithRadius(1, 'solid', colors.border, 0)};
       border-bottom: 1px solid ${colors.primary};
     }
   }
 `;
-
 const FlexWrapper = styled.div`
   display: flex;
 `;
-
 const CenteredDiv = styled.div`
   max-width: 80em;
-  margin: 2em auto;
-  padding: 0 1.3em;
+  margin: 1.5em auto;
+  padding: 0 1.4em;
 `;
 
-export function Demo({ dispatchGetSongs, dispatchClearSongs, songs, error, loading }) {
+export function Demo({ dispatchGetSongs, dispatchClearSongs, songs, loading, error }) {
   useInjectSaga({ key: 'demo', saga });
   const handleOnChange = searchText => {
-    if (searchText === '') {
+    if (isEmpty(searchText)) {
       dispatchClearSongs();
-    } else {
-      dispatchGetSongs(searchText);
+      return;
     }
+    dispatchGetSongs(searchText);
   };
+  const { formatMessage } = useIntl();
   const debouncedHandleOnChange = debounce(handleOnChange, 200);
   return (
     <CenteredDiv>
@@ -87,17 +84,22 @@ export function Demo({ dispatchGetSongs, dispatchClearSongs, songs, error, loadi
         <FlexWrapper>
           <CustomInput
             onChange={e => debouncedHandleOnChange(e.target.value)}
-            placeholder="Search iTunes"
+            placeholder={formatMessage({ id: 'placeholder' })}
           ></CustomInput>
         </FlexWrapper>
       </Card>
-      <TrackGrid songs={songs} loading={loading} />
+      <Skeleton loading={loading} active>
+        <TrackGrid songs={songs} />
+      </Skeleton>
+      <If condition={error}>
+        <Alert message={<T id="track_error" values={{ error }} />} type="error" />
+      </If>
     </CenteredDiv>
   );
 }
 
 Demo.propTypes = {
-  songs: PropTypes.array,
+  songs: PropTypes.arrayOf(PropTypes.object),
   loading: PropTypes.bool,
   dispatchGetSongs: PropTypes.func,
   dispatchClearSongs: PropTypes.func,
@@ -114,7 +116,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 function mapDispatchToProps(dispatch) {
-  const { requestGetSongs, clearSongs } = demoCreators;
+  const { requestGetSongs, clearSongs } = itunesCreators;
   return {
     dispatchGetSongs: searchText => dispatch(requestGetSongs(searchText)),
     dispatchClearSongs: () => dispatch(clearSongs())

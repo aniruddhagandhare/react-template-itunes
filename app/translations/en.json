@@ -5,15 +5,16 @@
   "get_repo_details": "Get details of repositories",
   "search_query": "Search query: {repoName}",
   "matching_repos": "Total number of matching repos: {totalCount}",
-  "something_went_wrong": "Sorry. Something went wrong! Please try again in sometime.",
+  "something_went_wrong": "Sorry. Something went wrong! Please try again after sometime.",
   "stories": "Go to Storybook",
   "repository_name": "Repository Name: {name}",
   "repository_full_name": "Repository full name: {fullName}",
   "repository_stars": "Repository stars: {stars}",
   "wednesday_solutions": "Wednesday Solutions",
+  "link_to_itunes": "Visit Itunes Application",
   "itunes_title": "Search for Music",
   "search_text": "Searched for {searchText}",
-  "track_heading": "From the Collection",
+  "track_heading": "From the Collection ",
   "track_heading_not_found": "Not from any collection",
   "collection_name": "{collectionName}",
   "back_to_all_tracks": "View all tracks",
@@ -22,5 +23,7 @@
   "artist_name": "{artistName}",
   "back_to_home": "Back",
   "track_list_heading": "Search for your favourite tracks",
-  "error": "{error}"
+  "placeholder": "Search itunes",
+  "by": " by ",
+  "track_error": "{error}"
 }

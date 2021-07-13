@@ -134,7 +134,8 @@ export function HomeContainer({
       <RightContent>
         <Clickable textId="stories" onClick={refreshPage} />
       </RightContent>
-      <Link to="/demo">Demo</Link>
+      <Link to="/demo"><T id="link_to_itunes" /></Link>
+      
 
       <CustomCard title={intl.formatMessage({ id: 'repo_search' })} maxwidth={maxwidth}>
         <T marginBottom={10} id="get_repo_details" />
@@ -142,7 +143,7 @@ export function HomeContainer({
           data-testid="search-bar"
           defaultValue={repoName}
           type="text"
-          onChange={evt => debouncedHandleOnChange(evt.target.svalue)}
+          onChange={evt => debouncedHandleOnChange(evt.target.value)}
           onSearch={searchText => debouncedHandleOnChange(searchText)}
         />
       </CustomCard>
@@ -159,7 +160,7 @@ HomeContainer.propTypes = {
   reposData: PropTypes.shape({
     totalCount: PropTypes.number,
     incompleteResults: PropTypes.bool,
-    items: PropTypes.array
+    items: PropTypes.object
   }),
   reposError: PropTypes.object,
   repoName: PropTypes.string,
