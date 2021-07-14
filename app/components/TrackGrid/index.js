@@ -16,15 +16,20 @@ const GridCard = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 1.5em;
 `;
+const Container = styled.div`
+  width: 100%;
+`
 
 function TrackGrid({ songs }) {
   return (
-    <For
-      of={songs}
-      isRow={false}
-      ParentComponent={GridCard}
-      renderItem={(song, idx) => <IndividualTrack track={song} key={idx} />}
-    />
+    <Container data-testid="track-grid">
+      <For
+        of={songs}
+        isRow={false}
+        ParentComponent={GridCard}
+        renderItem={(song, idx) => <IndividualTrack track={song} key={idx} />}
+      />
+    </Container>
   );
 }
 

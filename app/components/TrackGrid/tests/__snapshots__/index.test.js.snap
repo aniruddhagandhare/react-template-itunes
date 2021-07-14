@@ -2,6 +2,11 @@
 
 exports[`<TrackGrid /> should render and match the snapshot 1`] = `
 <body>
-  <div />
+  <div>
+    <div
+      class="TrackGrid__Container-sc-1fqyrr9-1 cIhyPO"
+      data-testid="track-grid"
+    />
+  </div>
 </body>
 `;

@@ -65,6 +65,7 @@ export function Demo({ dispatchGetSongs, dispatchClearSongs, songs, loading, err
       <Card title={<T id="track_list_heading" />}>
         <FlexWrapper>
           <CustomInput
+            data-testid="search-term"
             onChange={e => debouncedHandleOnChange(e.target.value)}
             placeholder={formatMessage({ id: 'placeholder' })}
           ></CustomInput>
