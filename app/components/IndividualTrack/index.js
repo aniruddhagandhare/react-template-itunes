@@ -131,7 +131,7 @@ function IndividualTrack({ track }) {
 }
 
 IndividualTrack.propTypes = {
-  track: PropTypes.shape(PropTypeContants).isRequired
+  track: PropTypes.shape(PropTypeContants)
 };
 
 export default memo(IndividualTrack);

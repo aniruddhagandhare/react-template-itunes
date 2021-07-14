@@ -28,5 +28,6 @@
   "track_error": "{error}",
   "genre_name": "{genreName}",
   "explicit": "{explicit}",
-  "price": "Price - $. {price}"
+  "price": "Price - $. {price}",
+  "more_tracks": "More Tracks"
 }

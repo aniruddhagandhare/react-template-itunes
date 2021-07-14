@@ -16,11 +16,13 @@ import { useInjectSaga } from '@utils/injectSaga';
 import T from '@app/components/T';
 import If from '@app/components/If';
 import IndividualTrack from '@app/components/IndividualTrack';
+import TrackGrid from '@app/components/TrackGrid';
 import { fonts, colors } from '@app/themes';
 import PropTypeContants from '@app/utils/PropTypeContants';
-import { selectError, selectLoading, selectTrack } from '../selectors';
+import { selectError, selectLoading, selectSongs, selectTrack } from '../selectors';
 import saga from '../saga';
 import { itunesCreators } from '../reducer';
+import { isEmpty } from 'lodash';
 
 const TrackWrapper = styled.div`
   max-width: 50em;
@@ -36,7 +38,10 @@ const CustomLink = styled(Link)`
     margin-bottom: ${props => (props.mb ? `${props.mb}em` : 0)};
   }
 `;
-export function Track({ track, dispatchGetTrackById, match, error, loading }) {
+const StyledT = styled(T)`
+  margin-top: 2em;
+`;
+export function Track({ track, dispatchGetTrackById, match, error, loading, songs }) {
   useInjectSaga({ key: 'track', saga });
   const { params } = match;
   const trackId = params.trackId;
@@ -54,22 +59,28 @@ export function Track({ track, dispatchGetTrackById, match, error, loading }) {
       <If condition={error}>
         <Alert message={<T id="track_error" values={{ error }} />} type="error" />
       </If>
+      <If condition={!isEmpty(songs)}>
+        <StyledT type="subheading" id="more_tracks" />
+        <TrackGrid songs={songs} />
+      </If>
     </TrackWrapper>
   );
 }
 
 Track.propTypes = {
-  track: PropTypes.shape(PropTypeContants).isRequired,
+  track: PropTypes.shape(PropTypeContants),
   dispatchGetTrackById: PropTypes.func,
   match: PropTypes.object,
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  songs: PropTypes.arrayOf(PropTypes.shape(PropTypeContants))
 };
 
 const mapStateToProps = createStructuredSelector({
   track: selectTrack(),
   error: selectError(),
-  loading: selectLoading()
+  loading: selectLoading(),
+  songs: selectSongs()
 });
 
 function mapDispatchToProps(dispatch) {

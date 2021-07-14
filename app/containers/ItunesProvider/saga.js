@@ -48,4 +48,4 @@ export default function* demoSaga() {
   yield takeLatest(REQUEST_GET_TRACK_BY_ID, getTrackByIdSaga);
 }
 
-const findSongInCache = (songs, param) => songs.filter(song => song.trackId == param);
+const findSongInCache = (songs, param) => songs.filter(song => song.trackId == param)
