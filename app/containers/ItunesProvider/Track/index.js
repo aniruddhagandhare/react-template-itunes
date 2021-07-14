@@ -17,12 +17,13 @@ import T from '@app/components/T';
 import If from '@app/components/If';
 import IndividualTrack from '@app/components/IndividualTrack';
 import { fonts, colors } from '@app/themes';
+import PropTypeContants from '@app/utils/PropTypeContants';
 import { selectError, selectLoading, selectTrack } from '../selectors';
 import saga from '../saga';
 import { itunesCreators } from '../reducer';
 
 const TrackWrapper = styled.div`
-  max-width: 80em;
+  max-width: 50em;
   margin: 0 auto;
   padding: 1.3em;
   position: relative;
@@ -58,34 +59,7 @@ export function Track({ track, dispatchGetTrackById, match, error, loading }) {
 }
 
 Track.propTypes = {
-  track: PropTypes.shape({
-    kind: PropTypes.string,
-    artistId: PropTypes.number,
-    collectionId: PropTypes.number,
-    trackId: PropTypes.number,
-    artistName: PropTypes.string,
-    collectionName: PropTypes.string,
-    trackName: PropTypes.string,
-    collectionCensoredName: PropTypes.string,
-    trackCensoredName: PropTypes.string,
-    artistViewUrl: PropTypes.String,
-    collectionViewUrl: PropTypes.string,
-    trackViewUrl: PropTypes.string,
-    previewUrl: PropTypes.string,
-    artworkUrl60: PropTypes.string,
-    artworkUrl100: PropTypes.string,
-    collectionProce: PropTypes.number,
-    trackPrice: PropTypes.number,
-    collectionExplicitness: PropTypes.string,
-    trackExplicitness: PropTypes.string,
-    discCount: PropTypes.number,
-    trackCount: PropTypes.number,
-    trackNumber: PropTypes.number,
-    trackTimeMillis: PropTypes.number,
-    country: PropTypes.string,
-    currency: PropTypes.string,
-    primaryGenre: PropTypes.string
-  }),
+  track: PropTypes.shape(PropTypeContants).isRequired,
   dispatchGetTrackById: PropTypes.func,
   match: PropTypes.object,
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),

@@ -2,6 +2,8 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
 @import 'antd/dist/antd.less';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap');
+
   html,
   body {
     height: 100vh;
@@ -11,11 +13,10 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
 
   body.fontLoaded {
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   #app {
@@ -28,7 +29,7 @@ const GlobalStyle = createGlobalStyle`
   span,
   button,
   label {
-    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-family: 'Montserrat', sans-serif;
     line-height: 1.5em;
     margin-bottom: 0;
   }

@@ -18,7 +18,8 @@ import T from '@components/T';
 import If from '@components/If';
 import TrackGrid from '@app/components/TrackGrid';
 import { colors, styles } from '@app/themes';
-import makeSelectDemo, { selectError, selectSearchText, selectSongs, selectLoading } from '../selectors';
+import PropTypeContants from '@app/utils/PropTypeContants';
+import makeSelectDemo, { selectError, selectSongs, selectLoading } from '../selectors';
 import saga from '../saga';
 import { itunesCreators } from '../reducer';
 
@@ -81,49 +82,18 @@ export function Demo({ dispatchGetSongs, dispatchClearSongs, songs, loading, err
 }
 
 Demo.propTypes = {
-  songs: PropTypes.arrayOf(
-    PropTypes.shape({
-      kind: PropTypes.string,
-      artistId: PropTypes.number,
-      collectionId: PropTypes.number,
-      trackId: PropTypes.number,
-      artistName: PropTypes.string,
-      collectionName: PropTypes.string,
-      trackName: PropTypes.string,
-      collectionCensoredName: PropTypes.string,
-      trackCensoredName: PropTypes.string,
-      artistViewUrl: PropTypes.String,
-      collectionViewUrl: PropTypes.string,
-      trackViewUrl: PropTypes.string,
-      previewUrl: PropTypes.string,
-      artworkUrl60: PropTypes.string,
-      artworkUrl100: PropTypes.string,
-      collectionPrice: PropTypes.number,
-      trackPrice: PropTypes.number,
-      collectionExplicitness: PropTypes.string,
-      trackExplicitness: PropTypes.string,
-      discCount: PropTypes.number,
-      trackCount: PropTypes.number,
-      trackNumber: PropTypes.number,
-      trackTimeMillis: PropTypes.number,
-      country: PropTypes.string,
-      currency: PropTypes.string,
-      primaryGenre: PropTypes.string
-    })
-  ),
+  songs: PropTypes.arrayOf(PropTypes.shape(PropTypeContants).isRequired),
   loading: PropTypes.bool,
   dispatchGetSongs: PropTypes.func,
   dispatchClearSongs: PropTypes.func,
-  error: PropTypes.string,
-  searchText: PropTypes.string
+  error: PropTypes.string
 };
 
 const mapStateToProps = createStructuredSelector({
   demo: makeSelectDemo(),
   songs: selectSongs(),
   loading: selectLoading(),
-  error: selectError(),
-  searchText: selectSearchText()
+  error: selectError()
 });
 
 function mapDispatchToProps(dispatch) {
