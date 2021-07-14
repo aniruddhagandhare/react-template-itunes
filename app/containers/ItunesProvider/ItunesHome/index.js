@@ -10,7 +10,6 @@ import { injectIntl, useIntl } from 'react-intl';
 import { Input, Card, Skeleton, Alert } from 'antd';
 import styled from 'styled-components';
 import debounce from 'lodash/debounce';
-import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { isEmpty } from 'lodash';
@@ -18,24 +17,12 @@ import { useInjectSaga } from '@utils/injectSaga';
 import T from '@components/T';
 import If from '@components/If';
 import TrackGrid from '@app/components/TrackGrid';
-import { fonts, colors, styles } from '@app/themes';
+import { colors, styles } from '@app/themes';
 import makeSelectDemo, { selectError, selectSearchText, selectSongs, selectLoading } from '../selectors';
 import saga from '../saga';
 import { itunesCreators } from '../reducer';
 
 // styled components
-const BackLink = styled.div`
-  a {
-    color: ${colors.text};
-    font-weight: bold;
-    ${fonts.size.regular()};
-    display: block;
-    margin-bottom: 1.5em;
-    &:hover {
-      color: ${colors.primary};
-    }
-  }
-`;
 const CustomInput = styled(Input)`
   && {
     padding: 0.8em;
@@ -75,11 +62,6 @@ export function Demo({ dispatchGetSongs, dispatchClearSongs, songs, loading, err
   const debouncedHandleOnChange = debounce(handleOnChange, 200);
   return (
     <CenteredDiv>
-      <BackLink>
-        <Link to="/">
-          <T id="back_to_home" />
-        </Link>
-      </BackLink>
       <Card title={<T id="track_list_heading" />}>
         <FlexWrapper>
           <CustomInput
@@ -99,7 +81,34 @@ export function Demo({ dispatchGetSongs, dispatchClearSongs, songs, loading, err
 }
 
 Demo.propTypes = {
-  songs: PropTypes.arrayOf(PropTypes.object),
+  songs: PropTypes.arrayOf(PropTypes.shape({
+    kind: PropTypes.string,
+    artistId: PropTypes.number,
+    collectionId: PropTypes.number,
+    trackId: PropTypes.number,
+    artistName: PropTypes.string,
+    collectionName: PropTypes.string,
+    trackName: PropTypes.string,
+    collectionCensoredName: PropTypes.string,
+    trackCensoredName: PropTypes.string,
+    artistViewUrl: PropTypes.String,
+    collectionViewUrl: PropTypes.string,
+    trackViewUrl: PropTypes.string,
+    previewUrl: PropTypes.string,
+    artworkUrl60: PropTypes.string,
+    artworkUrl100: PropTypes.string,
+    collectionPrice: PropTypes.number,
+    trackPrice: PropTypes.number,
+    collectionExplicitness: PropTypes.string,
+    trackExplicitness: PropTypes.string,
+    discCount: PropTypes.number,
+    trackCount: PropTypes.number,
+    trackNumber: PropTypes.number,
+    trackTimeMillis: PropTypes.number,
+    country: PropTypes.string,
+    currency: PropTypes.string,
+    primaryGenre: PropTypes.string
+  })),
   loading: PropTypes.bool,
   dispatchGetSongs: PropTypes.func,
   dispatchClearSongs: PropTypes.func,

@@ -1,15 +1,8 @@
 export default {
-  repos: {
+  itunes: {
     route: '/',
-    props: {
-      maxwidth: 500,
-      padding: 20
-    },
+    props: {},
     exact: true
-  },
-  demo: {
-    route: '/demo',
-    props: {}
   },
   track: {
     route: '/track/:trackId',

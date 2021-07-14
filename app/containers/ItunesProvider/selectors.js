@@ -6,7 +6,7 @@ import { get } from 'lodash';
  * Direct selector to the demo state domain
  */
 
-const selectDemoDomain = state => state.demoContainer || initialState;
+const selectDemoDomain = state => state.itunesReducer || initialState;
 
 const makeSelectDemo = () =>
   createSelector(

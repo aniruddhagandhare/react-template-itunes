@@ -6,7 +6,6 @@ import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 import history from 'utils/history';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
-import homeContainerReducer from 'containers/HomeContainer/reducer';
 import itunesContainerReducer from '@app/containers/ItunesProvider/reducer';
 
 /**
@@ -16,8 +15,7 @@ export default function createReducer() {
   const rootReducer = combineReducers({
     language: languageProviderReducer,
     router: connectRouter(history),
-    homeContainer: homeContainerReducer,
-    demoContainer: itunesContainerReducer
+    itunesReducer: itunesContainerReducer
   });
   return rootReducer;
 }
