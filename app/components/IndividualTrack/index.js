@@ -85,17 +85,16 @@ function IndividualTrack({ track }) {
     playing ? audioRef.current.pause() : audioRef.current.play();
     setPlaying(!playing);
   };
-  audioRef?.current?.addEventListener(
-    'timeupdate',
-    e => (currentTimeRef.current.style.width = (audioRef.current.currentTime / audioRef.current.duration) * 100 + '%')
-  );
+  const updateProgress = (e) => {
+    currentTimeRef.current.style.width = (audioRef.current.currentTime / audioRef.current.duration) * 100 + '%';
+  }
   return (
     <div>
       <CustomCard>
         <Content>
           <div>
             <AudioContainer src={track.artworkUrl100}>
-              <audio ref={audioRef} preload="auto">
+              <audio ref={audioRef} preload="auto" onTimeUpdate={updateProgress}>
                 <source src={track.previewUrl}></source>
               </audio>
               <AudioButton onClick={togglePlayState}>{playing ? <PauseOutlined /> : <CaretRightFilled />}</AudioButton>
