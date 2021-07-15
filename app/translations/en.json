@@ -29,5 +29,6 @@
   "genre_name": "{genreName}",
   "explicit": "{explicit}",
   "price": "Price - $. {price}",
-  "more_tracks": "More Tracks"
+  "more_tracks": "More Tracks",
+  "no_track_found": "No track Found :("
 }
