@@ -18,7 +18,7 @@ import If from '@app/components/If';
 import IndividualTrack from '@app/components/IndividualTrack';
 import TrackGrid from '@app/components/TrackGrid';
 import { fonts, colors } from '@app/themes';
-import PropTypeContants from '@app/utils/PropTypeContants';
+import { propTypeConstants } from '@utils/propTypeConstants';
 import { selectError, selectLoading, selectSongs, selectTrack } from '../selectors';
 import saga from '../saga';
 import { itunesCreators } from '../reducer';
@@ -68,12 +68,12 @@ export function Track({ track, dispatchGetTrackById, match, error, loading, song
 }
 
 Track.propTypes = {
-  track: PropTypes.shape(PropTypeContants),
+  track: propTypeConstants,
   dispatchGetTrackById: PropTypes.func,
   match: PropTypes.object,
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   loading: PropTypes.bool,
-  songs: PropTypes.arrayOf(PropTypes.shape(PropTypeContants))
+  songs: PropTypes.arrayOf(propTypeConstants).isRequired
 };
 
 const mapStateToProps = createStructuredSelector({

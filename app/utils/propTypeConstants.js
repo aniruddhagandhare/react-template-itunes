@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export default {
+export const propTypeConstants = PropTypes.shape({
   kind: PropTypes.string,
   artistId: PropTypes.number,
   collectionId: PropTypes.number,
@@ -27,4 +27,4 @@ export default {
   country: PropTypes.string,
   currency: PropTypes.string,
   primaryGenreName: PropTypes.string
-};
+});

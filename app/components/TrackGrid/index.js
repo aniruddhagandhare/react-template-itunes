@@ -11,13 +11,13 @@ import { Card, Tag, Tooltip } from 'antd';
 import { Link } from 'react-router-dom';
 import For from '@components/For';
 import T from '@components/T';
-import PropTypeContants from '@app/utils/PropTypeContants';
+import { propTypeConstants } from '@utils/propTypeConstants';
 import { colors, fonts } from '@app/themes/';
 
 const GridCard = styled.div`
   display: grid;
   margin-top: 2em;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(18.75em, 1fr));
   gap: 1.5em;
 `;
 const FlexContainer = styled.div`
@@ -81,7 +81,7 @@ function TrackGrid({ songs }) {
 }
 
 TrackGrid.propTypes = {
-  songs: PropTypes.arrayOf(PropTypes.shape(PropTypeContants)).isRequired
+  songs: PropTypes.arrayOf(propTypeConstants).isRequired
 };
 
 export default memo(TrackGrid);

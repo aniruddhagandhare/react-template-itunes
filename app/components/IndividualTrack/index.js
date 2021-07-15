@@ -1,11 +1,10 @@
 import React, { memo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Card, Tooltip, Tag } from 'antd';
 import { PauseOutlined, CaretRightFilled } from '@ant-design/icons';
 import T from '@components/T';
 import { colors } from '@app/themes';
-import PropTypeContants from '@app/utils/PropTypeContants';
+import { propTypeConstants } from '@utils/propTypeConstants';
 
 const Content = styled.div`
   display: flex;
@@ -85,52 +84,48 @@ function IndividualTrack({ track }) {
     playing ? audioRef.current.pause() : audioRef.current.play();
     setPlaying(!playing);
   };
-  const updateProgress = (e) => {
+  const updateProgress = e => {
     currentTimeRef.current.style.width = (audioRef.current.currentTime / audioRef.current.duration) * 100 + '%';
-  }
+  };
   return (
-    <div>
-      <CustomCard>
-        <Content>
-          <div>
-            <AudioContainer src={track.artworkUrl100}>
-              <audio ref={audioRef} preload="auto" onTimeUpdate={updateProgress}>
-                <source src={track.previewUrl}></source>
-              </audio>
-              <AudioButton onClick={togglePlayState}>{playing ? <PauseOutlined /> : <CaretRightFilled />}</AudioButton>
-            </AudioContainer>
-          </div>
-          <RightContent>
-            <Tooltip
-              placement="topLeft"
-              title={<StyledT type="subText" id="collection_name" values={{ collectionName: track.collectionName }} />}
-            >
-              <StyledT type="subheading" id="track_name" values={{ trackName: track.trackName }} />
-            </Tooltip>
-            <a style={{ color: colors.primary }} href={track.artistViewUrl} target="_blank" rel="noreferrer">
-              <StyledT type="subText" id="artist_name" values={{ artistName: track.artistName }} />
-            </a>
-            <VSpace />
-            <StyledT id="price" values={{ price: track.trackPrice }} />
-            <Tag color={colors.primary}>
-              <StyledT type="subText" id="explicit" values={{ explicit: track.trackExplicitness }} />
-            </Tag>
-            <Tag color={colors.primary}>
-              <StyledT type="subText" id="genre_name" values={{ genreName: track.primaryGenreName }} />
-            </Tag>
-          </RightContent>
-          <LinkTo href={track.trackViewUrl} target="_blank">
-            <StyledT type="subText" id="link_to_itunes" />
-          </LinkTo>
-        </Content>
-        <SongProgress ref={currentTimeRef} />
-      </CustomCard>
-    </div>
+    <CustomCard>
+      <Content>
+        <AudioContainer src={track.artworkUrl100}>
+          <audio ref={audioRef} preload="auto" onTimeUpdate={updateProgress}>
+            <source src={track.previewUrl}></source>
+          </audio>
+          <AudioButton onClick={togglePlayState}>{playing ? <PauseOutlined /> : <CaretRightFilled />}</AudioButton>
+        </AudioContainer>
+        <RightContent>
+          <Tooltip
+            placement="topLeft"
+            title={<StyledT type="subText" id="collection_name" values={{ collectionName: track.collectionName }} />}
+          >
+            <StyledT type="subheading" id="track_name" values={{ trackName: track.trackName }} />
+          </Tooltip>
+          <a style={{ color: colors.primary }} href={track.artistViewUrl} target="_blank" rel="noreferrer">
+            <StyledT type="subText" id="artist_name" values={{ artistName: track.artistName }} />
+          </a>
+          <VSpace />
+          <StyledT id="price" values={{ price: track.trackPrice }} />
+          <Tag color={colors.primary}>
+            <StyledT type="subText" id="explicit" values={{ explicit: track.trackExplicitness }} />
+          </Tag>
+          <Tag color={colors.primary}>
+            <StyledT type="subText" id="genre_name" values={{ genreName: track.primaryGenreName }} />
+          </Tag>
+        </RightContent>
+        <LinkTo href={track.trackViewUrl} target="_blank">
+          <StyledT type="subText" id="link_to_itunes" />
+        </LinkTo>
+      </Content>
+      <SongProgress ref={currentTimeRef} />
+    </CustomCard>
   );
 }
 
 IndividualTrack.propTypes = {
-  track: PropTypes.shape(PropTypeContants)
+  track: propTypeConstants.isRequired
 };
 
 export default memo(IndividualTrack);

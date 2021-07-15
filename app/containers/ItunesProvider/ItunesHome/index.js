@@ -18,7 +18,7 @@ import T from '@components/T';
 import If from '@components/If';
 import TrackGrid from '@app/components/TrackGrid';
 import { colors, styles } from '@app/themes';
-import PropTypeContants from '@app/utils/PropTypeContants';
+import { propTypeConstants } from '@utils/propTypeConstants';
 import makeSelectDemo, { selectError, selectSongs, selectLoading } from '../selectors';
 import saga from '../saga';
 import { itunesCreators } from '../reducer';
@@ -50,7 +50,7 @@ const CenteredDiv = styled.div`
   padding: 0 1.4em;
 `;
 
-export function Demo({ dispatchGetSongs, dispatchClearSongs, songs, loading, error }) {
+export function ItunesHome({ dispatchGetSongs, dispatchClearSongs, songs, loading, error }) {
   useInjectSaga({ key: 'demo', saga });
   const handleOnChange = searchText => {
     if (isEmpty(searchText)) {
@@ -81,8 +81,8 @@ export function Demo({ dispatchGetSongs, dispatchClearSongs, songs, loading, err
   );
 }
 
-Demo.propTypes = {
-  songs: PropTypes.arrayOf(PropTypes.shape(PropTypeContants).isRequired),
+ItunesHome.propTypes = {
+  songs: PropTypes.arrayOf(propTypeConstants).isRequired,
   loading: PropTypes.bool,
   dispatchGetSongs: PropTypes.func,
   dispatchClearSongs: PropTypes.func,
@@ -112,6 +112,6 @@ const withConnect = connect(
 export default compose(
   withConnect,
   memo
-)(Demo);
+)(ItunesHome);
 
-export const DemoTest = compose(injectIntl)(Demo);
+export const ItunesHomeTest = compose(injectIntl)(ItunesHome);
