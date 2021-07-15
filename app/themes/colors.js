@@ -13,6 +13,7 @@ const success = '#28a745';
 const error = '#dc3545';
 const border = '#e8e8e8';
 const shadow = 'rgba(0,0,0,0.04)';
+const overlay = 'rgba(0,0,0,0.3)';
 
 const colors = {
   transparent: 'rgba(0,0,0,0)',
@@ -25,6 +26,7 @@ const colors = {
   textLight,
   border,
   shadow,
+  overlay,
   theme: {
     lightMode: {
       primary,

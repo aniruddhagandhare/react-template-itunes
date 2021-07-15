@@ -32,7 +32,7 @@ const xRegular = () => css`
   font-size: 1.125rem;
 `;
 const small = () => css`
-  font-size: 0.875rem;
+  font-size: 0.675rem;
 `;
 const big = () => css`
   font-size: 1.25rem;
