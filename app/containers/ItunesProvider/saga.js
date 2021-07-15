@@ -23,7 +23,7 @@ export function* getSongsFromItunes(action) {
     yield put(errorGetSongs(data));
   }
 }
-export function* getTrackByIdSaga(action) {
+export function* getTrackById(action) {
   const songs = yield select(selectSongs());
   const song = findSongInCache(songs, action.trackId);
   if (!isEmpty(song)) {
@@ -46,7 +46,7 @@ export function* getTrackByIdSaga(action) {
 
 export default function* demoSaga() {
   yield takeLatest(REQUEST_GET_SONGS, getSongsFromItunes);
-  yield takeLatest(REQUEST_GET_TRACK_BY_ID, getTrackByIdSaga);
+  yield takeLatest(REQUEST_GET_TRACK_BY_ID, getTrackById);
 }
 
 const findSongInCache = (songs, param) => songs.filter(song => song.trackId == param);

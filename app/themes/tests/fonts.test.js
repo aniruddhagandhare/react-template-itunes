@@ -2,7 +2,7 @@ import fonts from '../fonts';
 
 describe('fonts', () => {
   it('should have the correct font-size', () => {
-    expect(fonts.size.small()).toEqual(expect.arrayContaining([expect.stringContaining('font-size:0.875rem')]));
+    expect(fonts.size.small()).toEqual(expect.arrayContaining([expect.stringContaining('font-size:0.675rem')]));
     expect(fonts.size.regular()).toEqual(expect.arrayContaining([expect.stringContaining('font-size:1rem;')]));
     expect(fonts.size.big()).toEqual(expect.arrayContaining([expect.stringContaining('font-size:1.25rem;')]));
     expect(fonts.size.large()).toEqual(expect.arrayContaining([expect.stringContaining('font-size:1.5rem;')]));

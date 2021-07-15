@@ -6,43 +6,43 @@ import { get } from 'lodash';
  * Direct selector to the demo state domain
  */
 
-const selectDemoDomain = state => state.itunesReducer || initialState;
+const selectItunesDomain = state => state.itunesReducer || initialState;
 
-const makeSelectDemo = () =>
+const makeSelectItunes = () =>
   createSelector(
-    selectDemoDomain,
+    selectItunesDomain,
     substate => substate
   );
 
 export const selectSongs = () =>
   createSelector(
-    selectDemoDomain,
+    selectItunesDomain,
     substate => get(substate, 'songs')
   );
 
 export const selectLoading = () =>
   createSelector(
-    selectDemoDomain,
+    selectItunesDomain,
     substate => get(substate, 'loading')
   );
 
 export const selectError = () =>
   createSelector(
-    selectDemoDomain,
+    selectItunesDomain,
     substate => get(substate, 'error')
   );
 
 export const selectSearchText = () =>
   createSelector(
-    selectDemoDomain,
+    selectItunesDomain,
     substate => get(substate, 'searchText')
   );
 
 export const selectTrack = () =>
   createSelector(
-    selectDemoDomain,
+    selectItunesDomain,
     substate => get(substate, 'track')
   );
 
-export default makeSelectDemo;
-export { selectDemoDomain };
+export default makeSelectItunes;
+export { selectItunesDomain };

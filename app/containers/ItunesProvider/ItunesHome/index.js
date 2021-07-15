@@ -19,7 +19,7 @@ import If from '@components/If';
 import TrackGrid from '@app/components/TrackGrid';
 import { colors, styles } from '@app/themes';
 import { propTypeConstants } from '@utils/propTypeConstants';
-import makeSelectDemo, { selectError, selectSongs, selectLoading } from '../selectors';
+import makeSelectItunes, { selectError, selectSongs, selectLoading } from '../selectors';
 import saga from '../saga';
 import { itunesCreators } from '../reducer';
 
@@ -91,7 +91,7 @@ ItunesHome.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  demo: makeSelectDemo(),
+  demo: makeSelectItunes(),
   songs: selectSongs(),
   loading: selectLoading(),
   error: selectError()

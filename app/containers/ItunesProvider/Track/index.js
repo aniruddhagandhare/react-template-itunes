@@ -17,7 +17,7 @@ import T from '@app/components/T';
 import If from '@app/components/If';
 import IndividualTrack from '@app/components/IndividualTrack';
 import TrackGrid from '@app/components/TrackGrid';
-import { fonts, colors } from '@app/themes';
+import { colors } from '@app/themes';
 import { propTypeConstants } from '@utils/propTypeConstants';
 import { selectError, selectLoading, selectSongs, selectTrack } from '../selectors';
 import saga from '../saga';
@@ -30,29 +30,22 @@ const TrackWrapper = styled.div`
   padding: 1.3em;
   position: relative;
 `;
-const CustomLink = styled(Link)`
-  && {
-    ${fonts.size.small()};
-    color: ${colors.primary};
-    display: block;
-    margin-bottom: ${props => (props.mb ? `${props.mb}em` : 0)};
-  }
-`;
+
 const StyledT = styled(T)`
   margin-top: 2em;
 `;
 export function Track({ track, dispatchGetTrackById, match, error, loading, songs }) {
   useInjectSaga({ key: 'track', saga });
   const { params } = match;
-  const trackId = params.trackId;
+  const trackId = params?.trackId;
   useEffect(() => {
     dispatchGetTrackById(trackId);
   }, []);
   return (
-    <TrackWrapper>
-      <CustomLink to="/" mb="2">
+    <TrackWrapper data-testid="track">
+      <Link to="/" style={{ color: colors.primary }}>
         <T id="back_to_all_tracks" />
-      </CustomLink>
+      </Link>
       <If condition={track} otherwise={<Skeleton loading={loading} active />}>
         <IndividualTrack track={track} showInfo={true} />
       </If>

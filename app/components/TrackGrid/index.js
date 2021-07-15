@@ -37,6 +37,10 @@ const StyledT = styled(T)`
 const VSpace = styled.div`
   margin: 0.5em 0;
 `;
+const Container = styled.div`
+  width: 100%;
+  padding: 1em 0;
+`;
 const Content = styled.div`
   margin-left: 2em;
   flex: 1;
@@ -44,39 +48,41 @@ const Content = styled.div`
 
 function TrackGrid({ songs }) {
   return (
-    <For
-      of={songs}
-      isRow={false}
-      ParentComponent={GridCard}
-      renderItem={(song, idx) => (
-        <Card key={idx}>
-          <FlexContainer>
-            <img src={song.artworkUrl60} />
-            <Content>
-              <Tooltip
-                placement="topLeft"
-                title={<StyledT small id="collection_name" values={{ collectionName: song.collectionName }} />}
-              >
-                <Link to={`/track/${song.trackId}`} style={{ color: colors.primary }}>
-                  <StyledT id="track_name" values={{ trackName: song.trackName }} />
-                </Link>
-              </Tooltip>
-              <StyledT
-                small
-                id="artist_name"
-                type="subtext"
-                style={{ color: colors.text }}
-                values={{ artistName: song.artistName }}
-              />
-              <VSpace />
-              <Tag color={colors.primary}>
-                <StyledT small id="genre_name" values={{ genreName: song.primaryGenreName }} />
-              </Tag>
-            </Content>
-          </FlexContainer>
-        </Card>
-      )}
-    />
+    <Container data-testid="track-grid">
+      <For
+        of={songs}
+        isRow={false}
+        ParentComponent={GridCard}
+        renderItem={(song, idx) => (
+          <Card key={idx}>
+            <FlexContainer>
+              <img src={song.artworkUrl60} />
+              <Content>
+                <Tooltip
+                  placement="topLeft"
+                  title={<StyledT small id="collection_name" values={{ collectionName: song.collectionName }} />}
+                >
+                  <Link to={`/track/${song.trackId}`} style={{ color: colors.primary }}>
+                    <StyledT id="track_name" values={{ trackName: song.trackName }} />
+                  </Link>
+                </Tooltip>
+                <StyledT
+                  small
+                  id="artist_name"
+                  type="subtext"
+                  style={{ color: colors.text }}
+                  values={{ artistName: song.artistName }}
+                />
+                <VSpace />
+                <Tag color={colors.primary}>
+                  <StyledT small id="genre_name" values={{ genreName: song.primaryGenreName }} />
+                </Tag>
+              </Content>
+            </FlexContainer>
+          </Card>
+        )}
+      />
+    </Container>
   );
 }
 
