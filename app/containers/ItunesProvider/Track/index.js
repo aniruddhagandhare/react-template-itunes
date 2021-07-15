@@ -16,13 +16,16 @@ import { useInjectSaga } from '@utils/injectSaga';
 import T from '@app/components/T';
 import If from '@app/components/If';
 import IndividualTrack from '@app/components/IndividualTrack';
+import TrackGrid from '@app/components/TrackGrid';
 import { fonts, colors } from '@app/themes';
-import { selectError, selectLoading, selectTrack } from '../selectors';
+import { propTypeConstants } from '@utils/propTypeConstants';
+import { selectError, selectLoading, selectSongs, selectTrack } from '../selectors';
 import saga from '../saga';
 import { itunesCreators } from '../reducer';
+import { isEmpty } from 'lodash';
 
 const TrackWrapper = styled.div`
-  max-width: 80em;
+  max-width: 50em;
   margin: 0 auto;
   padding: 1.3em;
   position: relative;
@@ -35,7 +38,10 @@ const CustomLink = styled(Link)`
     margin-bottom: ${props => (props.mb ? `${props.mb}em` : 0)};
   }
 `;
-export function Track({ track, dispatchGetTrackById, match, error, loading }) {
+const StyledT = styled(T)`
+  margin-top: 2em;
+`;
+export function Track({ track, dispatchGetTrackById, match, error, loading, songs }) {
   useInjectSaga({ key: 'track', saga });
   const { params } = match;
   const trackId = params.trackId;
@@ -53,49 +59,28 @@ export function Track({ track, dispatchGetTrackById, match, error, loading }) {
       <If condition={error}>
         <Alert message={<T id="track_error" values={{ error }} />} type="error" />
       </If>
+      <If condition={!isEmpty(songs)}>
+        <StyledT type="subheading" id="more_tracks" />
+        <TrackGrid songs={songs} />
+      </If>
     </TrackWrapper>
   );
 }
 
 Track.propTypes = {
-  track: PropTypes.shape({
-    kind: PropTypes.string,
-    artistId: PropTypes.number,
-    collectionId: PropTypes.number,
-    trackId: PropTypes.number,
-    artistName: PropTypes.string,
-    collectionName: PropTypes.string,
-    trackName: PropTypes.string,
-    collectionCensoredName: PropTypes.string,
-    trackCensoredName: PropTypes.string,
-    artistViewUrl: PropTypes.String,
-    collectionViewUrl: PropTypes.string,
-    trackViewUrl: PropTypes.string,
-    previewUrl: PropTypes.string,
-    artworkUrl60: PropTypes.string,
-    artworkUrl100: PropTypes.string,
-    collectionProce: PropTypes.number,
-    trackPrice: PropTypes.number,
-    collectionExplicitness: PropTypes.string,
-    trackExplicitness: PropTypes.string,
-    discCount: PropTypes.number,
-    trackCount: PropTypes.number,
-    trackNumber: PropTypes.number,
-    trackTimeMillis: PropTypes.number,
-    country: PropTypes.string,
-    currency: PropTypes.string,
-    primaryGenre: PropTypes.string
-  }),
+  track: propTypeConstants,
   dispatchGetTrackById: PropTypes.func,
   match: PropTypes.object,
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  songs: PropTypes.arrayOf(propTypeConstants).isRequired
 };
 
 const mapStateToProps = createStructuredSelector({
   track: selectTrack(),
   error: selectError(),
-  loading: selectLoading()
+  loading: selectLoading(),
+  songs: selectSongs()
 });
 
 function mapDispatchToProps(dispatch) {

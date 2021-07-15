@@ -18,7 +18,8 @@ import T from '@components/T';
 import If from '@components/If';
 import TrackGrid from '@app/components/TrackGrid';
 import { colors, styles } from '@app/themes';
-import makeSelectDemo, { selectError, selectSearchText, selectSongs, selectLoading } from '../selectors';
+import { propTypeConstants } from '@utils/propTypeConstants';
+import makeSelectDemo, { selectError, selectSongs, selectLoading } from '../selectors';
 import saga from '../saga';
 import { itunesCreators } from '../reducer';
 
@@ -49,7 +50,7 @@ const CenteredDiv = styled.div`
   padding: 0 1.4em;
 `;
 
-export function Demo({ dispatchGetSongs, dispatchClearSongs, songs, loading, error }) {
+export function ItunesHome({ dispatchGetSongs, dispatchClearSongs, songs, loading, error }) {
   useInjectSaga({ key: 'demo', saga });
   const handleOnChange = searchText => {
     if (isEmpty(searchText)) {
@@ -81,50 +82,19 @@ export function Demo({ dispatchGetSongs, dispatchClearSongs, songs, loading, err
   );
 }
 
-Demo.propTypes = {
-  songs: PropTypes.arrayOf(
-    PropTypes.shape({
-      kind: PropTypes.string,
-      artistId: PropTypes.number,
-      collectionId: PropTypes.number,
-      trackId: PropTypes.number,
-      artistName: PropTypes.string,
-      collectionName: PropTypes.string,
-      trackName: PropTypes.string,
-      collectionCensoredName: PropTypes.string,
-      trackCensoredName: PropTypes.string,
-      artistViewUrl: PropTypes.String,
-      collectionViewUrl: PropTypes.string,
-      trackViewUrl: PropTypes.string,
-      previewUrl: PropTypes.string,
-      artworkUrl60: PropTypes.string,
-      artworkUrl100: PropTypes.string,
-      collectionPrice: PropTypes.number,
-      trackPrice: PropTypes.number,
-      collectionExplicitness: PropTypes.string,
-      trackExplicitness: PropTypes.string,
-      discCount: PropTypes.number,
-      trackCount: PropTypes.number,
-      trackNumber: PropTypes.number,
-      trackTimeMillis: PropTypes.number,
-      country: PropTypes.string,
-      currency: PropTypes.string,
-      primaryGenre: PropTypes.string
-    })
-  ),
+ItunesHome.propTypes = {
+  songs: PropTypes.arrayOf(propTypeConstants).isRequired,
   loading: PropTypes.bool,
   dispatchGetSongs: PropTypes.func,
   dispatchClearSongs: PropTypes.func,
-  error: PropTypes.string,
-  searchText: PropTypes.string
+  error: PropTypes.string
 };
 
 const mapStateToProps = createStructuredSelector({
   demo: makeSelectDemo(),
   songs: selectSongs(),
   loading: selectLoading(),
-  error: selectError(),
-  searchText: selectSearchText()
+  error: selectError()
 });
 
 function mapDispatchToProps(dispatch) {
@@ -143,6 +113,6 @@ const withConnect = connect(
 export default compose(
   withConnect,
   memo
-)(Demo);
+)(ItunesHome);
 
-export const DemoTest = compose(injectIntl)(Demo);
+export const ItunesHomeTest = compose(injectIntl)(ItunesHome);

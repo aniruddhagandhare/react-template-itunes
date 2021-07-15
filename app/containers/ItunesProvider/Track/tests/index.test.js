@@ -7,7 +7,7 @@ describe('<Track /> container tests', () => {
         submitSpy= jest.fn();
     })
     it("should render and match snapshot", () => {
-        const { baseElement } = renderProvider(<Track />)
+        const { baseElement } = renderProvider(<Track  />)
         expect(baseElement).toMatchSnapshot();
     })
 })

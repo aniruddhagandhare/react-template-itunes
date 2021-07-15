@@ -1,4 +1,5 @@
 import { takeLatest, call, put, select } from 'redux-saga/effects';
+import { translate } from '@app/components/IntlGlobalProvider';
 import { itunesTypes, itunesCreators } from './reducer';
 import { getSongs, getTrack } from '@services/itunesApi';
 import { selectSongs } from './selectors';
@@ -35,7 +36,7 @@ export function* getTrackByIdSaga(action) {
       if (data.resultCount > 0) {
         yield put(successFetchTrackById(data));
       } else {
-        yield put(errorGetTrackById({ message: 'No track found :(' }));
+        yield put(errorGetTrackById({ message: translate('no_track_found') }));
       }
     } else {
       yield put(errorGetTrackById(data));

@@ -9,7 +9,7 @@ import { get } from 'lodash';
 import { translate } from '@app/components/IntlGlobalProvider';
 
 export const initialState = {
-  songs: null,
+  songs: [],
   error: null,
   loading: false,
   searchText: null,
