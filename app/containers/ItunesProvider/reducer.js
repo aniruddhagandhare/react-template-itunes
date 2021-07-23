@@ -47,9 +47,6 @@ export const itunesReducer = (state = initialState, action) =>
       case itunesTypes.CLEAR_SONGS:
         return initialState;
       // track reducer
-      case itunesTypes.GET_TRACK_BY_ID:
-        draft.loading = true;
-        break;
       case itunesTypes.SUCCESS_GET_TRACK_BY_ID:
         draft.error = null;
         draft.loading = false;

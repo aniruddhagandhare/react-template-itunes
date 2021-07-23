@@ -88,7 +88,7 @@ function IndividualTrack({ track }) {
     currentTimeRef.current.style.width = (audioRef.current.currentTime / audioRef.current.duration) * 100 + '%';
   };
   return (
-    <CustomCard>
+    <CustomCard data-testid="track">
       <Content>
         <AudioContainer src={track.artworkUrl100}>
           <audio ref={audioRef} preload="auto" onTimeUpdate={updateProgress}>

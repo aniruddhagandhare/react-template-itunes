@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Track /> should render and match the snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="ant-card ant-card-bordered IndividualTrack__CustomCard-sc-1gi6ox1-4 eMahDM"
+      data-testid="track"
+    >
+      <div
+        class="ant-card-body"
+      >
+        <div
+          class="IndividualTrack__Content-sc-1gi6ox1-0 hkHlBc"
+        >
+          <div
+            class="IndividualTrack__AudioContainer-sc-1gi6ox1-3 jxLaGq"
+          >
+            <audio
+              preload="auto"
+            >
+              <source
+                src="https://audio-ssl.itunes.apple.com/itunes-assets/Music/v4/de/1d/c1/de1dc139-7898-5fbb-da66-06ce88426178/mzaf_1897766559436846339.plus.aac.p.m4a"
+              />
+            </audio>
+            <div
+              class="IndividualTrack__AudioButton-sc-1gi6ox1-2 ligNUl"
+            >
+              <span
+                aria-label="caret-right"
+                class="anticon anticon-caret-right"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="caret-right"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="0 0 1024 1024"
+                  width="1em"
+                >
+                  <path
+                    d="M715.8 493.5L335 165.1c-14.2-12.2-35-1.2-35 18.5v656.8c0 19.7 20.8 30.7 35 18.5l380.8-328.4c10.9-9.4 10.9-27.6 0-37z"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div
+            class="IndividualTrack__RightContent-sc-1gi6ox1-1 gPpiCv"
+          >
+            <p
+              class="T__StyledText-gjlic1-0 hCAeFa IndividualTrack__StyledT-sc-1gi6ox1-5 imKGmW"
+              data-testid="t"
+            >
+              Just Another Day
+            </p>
+            <a
+              rel="noreferrer"
+              style="color: rgb(223, 94, 94);"
+              target="_blank"
+            >
+              <p
+                class="T__StyledText-gjlic1-0 bVNisQ IndividualTrack__StyledT-sc-1gi6ox1-5 imKGmW"
+                data-testid="t"
+              >
+                by Drake
+              </p>
+            </a>
+            <div
+              class="IndividualTrack__VSpace-sc-1gi6ox1-6 cjhaPD"
+            />
+            <p
+              class="T__StyledText-gjlic1-0 cbAvsY IndividualTrack__StyledT-sc-1gi6ox1-5 imKGmW"
+              data-testid="t"
+            >
+              Price - $. 0.99
+            </p>
+            <span
+              class="ant-tag ant-tag-has-color"
+              style="background-color: rgb(223, 94, 94);"
+            >
+              <p
+                class="T__StyledText-gjlic1-0 bVNisQ IndividualTrack__StyledT-sc-1gi6ox1-5 imKGmW"
+                data-testid="t"
+              >
+                explicit
+              </p>
+            </span>
+            <span
+              class="ant-tag ant-tag-has-color"
+              style="background-color: rgb(223, 94, 94);"
+            >
+              <p
+                class="T__StyledText-gjlic1-0 bVNisQ IndividualTrack__StyledT-sc-1gi6ox1-5 imKGmW"
+                data-testid="t"
+              >
+                
+              </p>
+            </span>
+          </div>
+          <a
+            class="IndividualTrack__LinkTo-sc-1gi6ox1-7 dfSsTA"
+            target="_blank"
+          >
+            <p
+              class="T__StyledText-gjlic1-0 bVNisQ IndividualTrack__StyledT-sc-1gi6ox1-5 imKGmW"
+              data-testid="t"
+            >
+              View Track
+            </p>
+          </a>
+        </div>
+        <div
+          class="IndividualTrack__SongProgress-sc-1gi6ox1-8 cPDWaK"
+        />
+      </div>
+    </div>
+  </div>
+</body>
+`;
